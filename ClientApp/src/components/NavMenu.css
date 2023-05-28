@@ -1,0 +1,46 @@
+﻿a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.navbar {
+    border-bottom: 1px solid #d4d9db;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    margin-bottom: 50px;
+    height: 70px;
+    background-color: #edebf4;
+    font-weight: 600;
+}
+
+.navbar-nav {
+    width: 400px;
+    display: flex;
+    justify-content: space-between; 
+}
+
+.signUp {
+    background-color: #0e4cb7;
+    border-radius: 8px;
+}
+
+.login li {
+    color: #0d8dad;
+}
+
+.login:hover {
+
+}
