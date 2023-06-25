@@ -1,10 +1,1 @@
-﻿.productsList {
-    display: flex;
-    flex-wrap: wrap;
-    width: 90%;
-    justify-content: space-between;
-}
-
-.product{
-    margin-bottom: 60px;
-}
+﻿

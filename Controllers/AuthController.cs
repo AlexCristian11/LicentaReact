@@ -2,7 +2,9 @@
 using LicentaReact.DTOs;
 using LicentaReact.Helpers;
 using LicentaReact.Models;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LicentaReact.Controllers
 {
@@ -29,7 +31,7 @@ namespace LicentaReact.Controllers
 				Adresa = dto.Adresa,
 				Parola = BCrypt.Net.BCrypt.HashPassword(dto.Parola),
 			};
-
+			
 			return Created("success", _repository.Create(user));
 		}
 
@@ -40,12 +42,12 @@ namespace LicentaReact.Controllers
 
 			if (user == null)
 			{
-				return BadRequest(new { message = "Invalid Credentials" });
+				return Unauthorized(new { message = "Invalid email or password." });
 			}
 
 			if (!BCrypt.Net.BCrypt.Verify(dto.Parola, user.Parola))
 			{
-				return BadRequest(new { message = "Invalid Credentials" });
+				return Unauthorized(new { message = "Invalid email or password." });
 			}
 
 			var jwt = _jwtService.Generate(user.Id);
@@ -55,10 +57,13 @@ namespace LicentaReact.Controllers
 				HttpOnly = true,
 			});
 
-			return Ok(new
+			var userData = new
 			{
-				message = "success"
-			});
+				user.Id,
+				user.Prenume,
+			};
+
+			return Ok(userData);
 		}
 
 		[HttpGet("user")]
