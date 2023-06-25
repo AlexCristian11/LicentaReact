@@ -1,4 +1,7 @@
 ﻿import React, { Component, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 import { Navigate } from 'react-router-dom';
 import './Login.css'; 
 
@@ -9,7 +12,7 @@ const Login = () => {
 
     const submit = async (e) => {
         e.preventDefault();
-        await fetch('https://localhost:7277/api/login', {
+        const response = await fetch('https://localhost:7277/api/login', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -21,7 +24,18 @@ const Login = () => {
             })
         });
 
-        setRedirect(true);
+        NotificationManager.removeAll();
+
+        if (response.ok) {
+            console.log('Login');
+            NotificationManager.success('Login successful');
+            const data = await response.json();
+            setTimeout(() => {
+                setRedirect(true);
+            }, 1000);
+        } else {
+            NotificationManager.error('Invalid email or password');
+        }
     }
 
     if (redirect) {
@@ -38,7 +52,10 @@ const Login = () => {
                         <input type="password" id="inputPassword" className="form-control" placeholder="Parola" required onChange={e => setParola(e.target.value) } />
                         <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                     </form>
+                    <NotificationContainer className="custom-notification-container"
+                        notificationClassName="custom-notification" />
                 </main>
+                
             </div>
         )
 }

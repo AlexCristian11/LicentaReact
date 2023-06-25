@@ -30,6 +30,7 @@ html {
     width: 400px;
     display: flex;
     justify-content: space-between; 
+    align-items: center;
 }
 
 .signUp {
@@ -43,4 +44,9 @@ html {
 
 .login:hover {
 
+}
+
+#icon-nav {
+    font-size: 1.5rem;
+    color: #b70c0c;
 }

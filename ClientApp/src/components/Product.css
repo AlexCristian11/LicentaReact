@@ -8,6 +8,7 @@
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
     border-radius: 5px;
     background-color: white;
+    margin-bottom: 40px;
 }
 
 .product img {
@@ -52,4 +53,11 @@
 #icon {
     color: white;
     font-size: 20px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }

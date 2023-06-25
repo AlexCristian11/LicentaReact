@@ -35,3 +35,13 @@
         flex-direction: column;
         align-items: center;
     }
+
+.custom-notification-container {
+    opacity: 1;
+}
+
+.custom-notification {
+    opacity: 1 !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    color: white !important;
+}
