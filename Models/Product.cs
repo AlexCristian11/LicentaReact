@@ -20,7 +20,5 @@ namespace LicentaReact.Models
 
 		public int CategoryId { get; set; }
 		public Category Category { get; set; } = null!;
-
-		public virtual ICollection<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
 	}
 }
