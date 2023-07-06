@@ -1,4 +1,5 @@
 ﻿using LicentaReact.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LicentaReact.Data
 {
@@ -25,6 +26,20 @@ namespace LicentaReact.Data
 		public User GetById(int id)
 		{
 			return _context.Users.FirstOrDefault(u => u.Id == id);
+		}
+
+		public void DeleteUser(int userId)
+		{
+			var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+			if (user != null)
+			{
+				_context.Users.Remove(user);
+				_context.SaveChanges();
+			} else
+			{
+				throw new ArgumentException($"User with ID {userId} not found.");
+			}
 		}
 	}
 }

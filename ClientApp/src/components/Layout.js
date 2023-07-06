@@ -1,18 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { Container } from 'reactstrap';
 import NavMenu from './NavMenu';
+import { DarkModeContext } from '../DarkModeContext';
 
-export class Layout extends Component {
-  static displayName = Layout.name;
+const Layout = ({ children }) => {
 
-  render() {
+    const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+
+    const containerStyle = {
+        backgroundColor: isDarkMode ? '#121212' : '#ffffff',
+        color: isDarkMode ? '#f2f2f2' : '#000000',
+    };
+
+    const rootStyle = {
+        backgroundColor: isDarkMode ? '#121212' : '#ffffff',
+        minHeight: '100vh',
+    };
+
     return (
-      <div>
-        <NavMenu />
-        <Container>
-          {this.props.children}
-        </Container>
-      </div>
+        <div style={rootStyle}>
+            <NavMenu />
+            <Container className={isDarkMode ? 'dark-mode-container' : ''} style={isDarkMode ? containerStyle : null}>{children}</Container>
+        </div>
     );
-  }
-}
+};
+
+export default Layout;

@@ -3,12 +3,17 @@
     height: 30rem;
 }
 
+#details-image {
+    margin-top: 60px;
+}
+
 .product-page{
     display: flex;
+    margin-top: 70px;
 }
 
 .product-details {
-    margin: 40px 0px 0px 50px;
+    margin: 60px 0px 0px 50px;
 }
 
 #price {

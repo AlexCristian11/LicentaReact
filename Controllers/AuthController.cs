@@ -2,9 +2,12 @@
 using LicentaReact.DTOs;
 using LicentaReact.Helpers;
 using LicentaReact.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace LicentaReact.Controllers
 {
@@ -14,7 +17,7 @@ namespace LicentaReact.Controllers
 	{
 		private readonly IUserRepository _repository;
 		private readonly JwtService _jwtService;
-		public AuthController(IUserRepository repository, JwtService jwtService) 
+		public AuthController(IUserRepository repository, JwtService jwtService)
 		{
 			_repository = repository;
 			_jwtService = jwtService;
@@ -31,8 +34,10 @@ namespace LicentaReact.Controllers
 				Adresa = dto.Adresa,
 				Parola = BCrypt.Net.BCrypt.HashPassword(dto.Parola),
 			};
-			
-			return Created("success", _repository.Create(user));
+
+			_repository.Create(user);
+
+			return Ok(new { message = "User created successfully." });
 		}
 
 		[HttpPost("login")]
@@ -85,11 +90,31 @@ namespace LicentaReact.Controllers
 			{
 				return Unauthorized();
 			}
-			
+
+		}
+
+		[HttpGet("user/{userId}")]
+		public IActionResult GetUserById(int userId)
+		{
+			try
+			{
+				var user = _repository.GetById(userId);
+
+				if (user == null)
+				{
+					return NotFound();
+				}
+
+				return Ok(user);
+			}
+			catch (Exception)
+			{
+				return StatusCode(500, "Internal server error");
+			}
 		}
 
 		[HttpPost("logout")]
-		public IActionResult Logout() 
+		public IActionResult Logout()
 		{
 			Response.Cookies.Delete("jwt");
 
@@ -97,6 +122,20 @@ namespace LicentaReact.Controllers
 			{
 				message = "success"
 			});
+		}
+
+		[HttpDelete("users/{userId}")]
+		public IActionResult DeleteUser(int userId)
+		{
+			try
+			{
+				_repository.DeleteUser(userId);
+				return Ok("User deleted successfully.");
+			}
+			catch (Exception)
+			{
+				return StatusCode(500, "Internal server error");
+			}
 		}
 	}
 }

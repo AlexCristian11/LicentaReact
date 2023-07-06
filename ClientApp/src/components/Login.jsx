@@ -28,13 +28,20 @@ const Login = () => {
 
         if (response.ok) {
             console.log('Login');
-            NotificationManager.success('Login successful');
+            NotificationManager.success('Autentificare cu succes');
             const data = await response.json();
+            const { id } = data; 
+            const { prenume } = data;
+
+            localStorage.setItem('userId', id);
+            localStorage.setItem('prenume', prenume);
+            localStorage.setItem('email', email);
+
             setTimeout(() => {
                 setRedirect(true);
             }, 1000);
         } else {
-            NotificationManager.error('Invalid email or password');
+            NotificationManager.error('Email-ul sau parola sunt incorecte');
         }
     }
 
@@ -44,7 +51,7 @@ const Login = () => {
 
 
         return (
-            <div>
+            <div className="login-component">
                 <main className="form-signin">
                     <form onSubmit={ submit }>
                         <h1 className="h3 mb-3 fw-normal">Sign in</h1>
