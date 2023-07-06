@@ -4,3 +4,72 @@
     flex-wrap: wrap;
     width: 90%;
 }
+
+
+.slider {
+    margin-bottom: 50px;
+    height: 500px;
+    border-radius: 12px;
+    margin-top: 40px;
+}
+
+    .slider img {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+.slick-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: gray;
+    opacity: 0.9;
+    transition: opacity 0.2s ease-in-out;
+}
+
+    .slick-arrow:hover {
+        opacity: 1;
+    }
+
+.slick-prev {
+    background-image: url('../assets/211617_b_left_arrow_icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    left: -45px !important;
+}
+
+.slick-next {
+    background-image: url('../assets/211620_b_right_arrow_icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+    .slick-prev:before,
+    .slick-next:before {
+        font-size: 40px !important; /* Increase the font-size as desired */
+        line-height: 30px !important; /* Adjust the line-height as needed */
+        color: black !important;
+       
+    }
+
+.dark-mode-slider .slick-prev:before .slick-next:before {
+        font-size: 40px !important; /* Increase the font-size as desired */
+        line-height: 30px !important; /* Adjust the line-height as needed */
+        color: white !important;
+       
+}
+
+.dark-mode-slider .slick-dots li button:before {
+    color: white;
+}
+
+.dark-mode .slick-prev:before,
+.dark-mode .slick-next:before {
+    color: white !important;
+}
+
+.container-home {
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+}

@@ -1,46 +1,77 @@
-import React, { Component, useEffect, useState } from 'react';
+﻿import React, { Component, useEffect, useState, useRef, useContext } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './NavMenu.css';
 import { DownOutlined, SmileOutlined } from '@ant-design/icons';
-import { Dropdown, Space } from 'antd';
-import { BsFillCartFill } from 'react-icons/bs'
+import { Dropdown, Menu } from 'antd';
+import { LinkOutlined } from '@ant-design/icons';
+import { BsFillCartFill, BsSun, BsMoonFill } from 'react-icons/bs'
+import { DarkModeContext } from '../DarkModeContext';
+
+const checkIfAdmin = (email) => {
+    const adminEmails = ['admin@test.com'];
+    return adminEmails.includes(email);
+}
 
 const NavMenu = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleItemClick = (item) => {
+        console.log(`Selected item: ${item}`);
+        setIsOpen(false);
+    };
 
     useEffect(() => {
-        const token = getCookie('jwt');
-        if (token) {
-            fetchUserData(token)
+        const prenume = localStorage.getItem("prenume");
+        console.log(prenume);
+
+        if (prenume) {
+            setIsLoggedIn(true);
+            setUsername(prenume);
+
         }
-    }, []);
 
-    function getCookie(name) {
-        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-        return cookieValue ? cookieValue.pop() : '';
-    }
+        const email = localStorage.getItem('email');
+        const isAdminUser = checkIfAdmin(email);
 
-    const fetchUserData = (token) => {
-        fetch('https://localhost:7277/api/user', {
-            headers: {
-                Authorization: `bearer ${token}`,
-            }
+        if (isAdminUser) {
+            setIsAdmin(true);
+        }
+
+        const handleClickOutside = (event) => {
+            if (event.target.closest('.dropdown')) return;
+            setIsOpen(false);
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [isLoggedIn]);
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        fetch('https://localhost:7277/api/logout', {
+            method: 'POST',
+            credentials: 'include',
         })
             .then((response) => {
                 if (response.ok) {
-                    return response.json();
+                    localStorage.clear();
+                    setIsLoggedIn(false);
+                    window.location.reload();
                 } else {
-                    throw new Error('Failed to fetch user data');
-                }
-            })
-            .then((data) => {
-                if (data) {
-                    setIsLoggedIn(true);
-                    setUsername(data.prenume);
-                    console.log(username);
+                    throw new Error('Failed to logout');
                 }
             })
             .catch((error) => {
@@ -49,34 +80,23 @@ const NavMenu = () => {
     };
 
     return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar" container light>
-          <NavbarBrand tag={Link} to="/">OnlineCave</NavbarBrand>
+        <header>
+            <Navbar className={`${isDarkMode ? 'dark-mode-nav' : ''} navbar-expand-sm navbar`} container>
+                <NavbarBrand tag={Link} to="/" className={isDarkMode ? 'dark-mode-nav' : ''}>OnlineCave</NavbarBrand>
          
           
-            <ul className="navbar-nav flex-grow">
+              <ul className="navbar-nav flex-grow" >
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                {/*<Dropdown menu={{ items, }}>*/}
-                {/*   <a onClick={(e) => e.preventDefault()}>*/}
-                {/*      <Space>*/}
-                {/*         Categories*/}
-                {/*      </Space>*/}
-                {/*   </a>*/}
-                {/*</Dropdown>*/}
-
-                <NavLink tag={Link} className="text-dark" to="/">Categories</NavLink>
+                <NavLink tag={Link} to="/">Acasă</NavLink>
               </NavItem>
                         {
                             isLoggedIn ? (
                                 <>
-                                    <NavItem>
-                                        <NavLink tag={Link} className="account" to="/account">{username}</NavLink>
+                                <NavItem>
+                                    {isAdmin ? <NavLink tag={Link} className="admin" to="/api/admin">Admin</NavLink> : <NavLink tag={Link} className="account" to="/api/account">{username}</NavLink>}
                                     </NavItem>
-                                    <NavItem>
-                                        <NavLink tag={Link} className="logout" to="/">Logout</NavLink>
+                                <NavItem>
+                                    <NavLink tag={Link} className="logout" to="/" onClick={handleLogout}>Logout</NavLink>
                                     </NavItem>
                                 </>
                             ) : (
@@ -90,13 +110,10 @@ const NavMenu = () => {
                                 </>
                             )
               }
-              {/*<NavItem>*/}
-              {/*  <NavLink tag={Link} className="login" to="/login"><li>Login</li></NavLink>*/}
-              {/*</NavItem>*/}
-             
               <NavItem>
                 <NavLink tag={Link} className="text-light icon-nav" to="/cart"><BsFillCartFill id="icon-nav" /></NavLink>
-              </NavItem>
+                    </NavItem>
+                    <button onClick={toggleDarkMode} className={`toggle ${isDarkMode ? 'dark-icon' : ''}`}>{isDarkMode ? <BsSun /> : <BsMoonFill />}</button>
             </ul>
          
         </Navbar>
@@ -104,38 +121,6 @@ const NavMenu = () => {
     );
   }
 
-const items = [
-    {
-        key: '1',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="">
-                1st menu item
-            </a>
-        ),
-    },
-    {
-        key: '2',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="">
-                2nd menu item (disabled)
-            </a>
-        ),
-        disabled: true,
-    },
-    {
-        key: '3',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="">
-                3rd menu item (disabled)
-            </a>
-        ),
-        disabled: true,
-    },
-    {
-        key: '4',
-        danger: true,
-        label: 'a danger item',
-    },
-];
+
 
 export default NavMenu;

@@ -1,0 +1,43 @@
+﻿body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-page {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 70px;
+}
+
+.user {
+    width: 400px;
+    margin-left: 100px;
+    margin-top: 60px;
+}
+
+.product-form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    margin-left: 200px;
+    margin-top: 60px;
+}
+
+.category-form {
+    position: relative;
+    left: 100px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    
+}

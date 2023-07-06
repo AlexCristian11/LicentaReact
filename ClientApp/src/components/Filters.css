@@ -1,0 +1,34 @@
+﻿body {
+}
+
+.filters {
+    margin: 50px auto;
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
+}
+
+.filter {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #b70c0c;
+    cursor: pointer;
+}
+
+.filter h4 {
+    font-size: 1rem;
+}
+
+.filter img {
+    height: 60px;
+    width: 60px;
+}
+
+.selected {
+    background-color: #f95959;
+}

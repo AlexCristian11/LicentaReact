@@ -1,0 +1,25 @@
+﻿body {
+}
+
+.add-product {
+    width: 50%;
+}
+
+.add-product h1 {
+    font-size: 1.5rem;
+}
+
+.add-product input {
+    margin: 10px 0;
+    width: 350px;
+}
+
+.add-product textarea {
+    margin: 10px 0;
+    width: 350px;
+}
+
+.add-product button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

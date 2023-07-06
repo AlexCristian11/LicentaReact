@@ -1,0 +1,148 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+.cart {
+    margin-top: 70px;
+    margin: 70px auto;
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.cart h1 {
+    font-size: 1.5rem;
+    margin-top: 50px;
+}
+
+.cart-products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-cart {
+    display: flex;
+    height: 320px;
+    width: 500px;
+    margin-top: 50px;
+    background-color: #efeaea;
+    border-radius: 15px;
+}
+
+.product-cart img {
+    height: 300px;
+    width: 250px;
+}
+
+.details-for-cart-product {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 400px;
+    text-align: center;
+}
+
+.cart-details-price {
+    color: #c60101;
+}
+
+.details-for-cart-product h4 {
+    font-size: 1.25rem;
+    margin: 15px 0;
+}
+
+.quantity input {
+    width: 50px;
+    height: 50px;
+    margin: 10px 10px;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.quantity button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #04669b;
+    color: white;
+}
+
+.cart-details {
+    width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.order-details {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    margin: 10px 0;
+    padding-top: 20px;
+}
+
+#price-cart {
+    color: #c60101;
+}
+
+.cart-container {
+    position: relative;
+    margin-top: 50px;
+    border-radius: 12px;
+    height: 200px;
+    width: 350px;
+    background-color: #efeaea;
+}
+
+#total {
+    position: absolute;
+    bottom: 10px;
+    font-size: 1.5rem;
+    margin-left: 30%;
+}
+
+#finish-order {
+    margin-top: 30px;
+    width: 350px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+}
+
+.dark-mode-cart-product {
+    background-color: black;
+}
+
+.payment-container {
+    display: flex;
+    width: 250px;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 15%;
+}
+
+.payment-method {
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+}
+
+.payment-method label {
+    font-size: 1.25rem;
+    margin-right: 10px;
+}
+
+#card, #cash {
+    display: flex;
+    justify-items: center;
+}

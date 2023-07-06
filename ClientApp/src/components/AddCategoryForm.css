@@ -1,0 +1,24 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+}
+
+.add-category-form {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.add-category-form h1{
+    font-size: 1.5rem;
+}
+
+.add-category-form input {
+    margin: 10px 0;
+    width: 350px;
+}
+
+#button-add-category {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 10px;
+}

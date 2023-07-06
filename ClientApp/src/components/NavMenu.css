@@ -1,4 +1,12 @@
-﻿a.navbar-brand {
+﻿header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+}
+
+a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -49,4 +57,25 @@ html {
 #icon-nav {
     font-size: 1.5rem;
     color: #b70c0c;
+}
+
+.dark-mode-nav {
+    background-color: black;
+    color: #f2f2f2;
+    border-bottom: none;
+}
+
+    .dark-mode-nav:hover {
+        color: #0d8dad;
+    }
+
+.toggle {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.dark-icon {
+    color: white;
 }

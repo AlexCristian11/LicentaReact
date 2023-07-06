@@ -7,5 +7,6 @@ namespace LicentaReact.Data
 		User Create(User user);
 		User GetByEmail(string email);
 		User GetById(int id);
+		void DeleteUser(int id);
 	}
 }

@@ -9,6 +9,7 @@
     border-radius: 5px;
     background-color: white;
     margin-bottom: 40px;
+    cursor: pointer;
 }
 
 .product img {
@@ -48,6 +49,7 @@
     width: 40px;
     background-image: linear-gradient(to right, rgba(52,12,183), rgba(93,46,247));
     border-radius: 6px;
+    border: none;
 }
 
 #icon {
@@ -60,4 +62,10 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.dark-mode-product {
+    color: white;
+    background-color: black;
+    border: none;
 }
