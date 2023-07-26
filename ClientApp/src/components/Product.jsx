@@ -20,6 +20,34 @@ const Product = ({ categoryId }) => {
             });
     }, []);
 
+    //const handleAddToCart = (product) => {
+    //    const userId = localStorage.getItem('userId');
+    //    console.log(userId);
+    //    console.log(product);
+
+    //    if (!userId) {
+    //        console.log('User is not logged in.');
+    //        return;
+    //    }
+
+    //    fetch(`https://localhost:7277/api/cart-add?userId=${userId}&productId=${product}&quantity=1`, {
+    //        method: 'POST',
+    //        headers: {
+    //            'Content-Type': 'application/json'
+    //        }
+    //    })
+    //        .then((response) => {
+    //            if (response.ok) {
+    //                console.log('Product added to cart successfully.');
+    //            } else {
+    //                console.log('Error adding product to cart:', response.status);
+    //            }
+    //        })
+    //        .catch((error) => {
+    //            console.error('Error adding product to cart:', error);
+    //        });
+    //};
+
     const handleProductClick = (productId) => {
         navigate(`/api/products/${productId}`);
     }
@@ -40,7 +68,7 @@ const Product = ({ categoryId }) => {
                                 <div className="details">
                                     <p>{product.pret} Lei</p>
                                     <button className="icon">
-                                        <BsFillCartFill id="icon" />
+                                        <BsFillCartFill id="icon"  />
                                     </button>
                                 </div>
                         </div>

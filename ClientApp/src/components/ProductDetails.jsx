@@ -1,6 +1,8 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ProductDetails.css';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 import { BsFillCartFill } from 'react-icons/bs';
 
 const ProductDetails = () => {
@@ -29,30 +31,27 @@ const ProductDetails = () => {
             return;
         }
 
-        // Make the API request to add the product to the cart
-        fetch('https://localhost:7277/api/cart', {
+        
+        fetch(`https://localhost:7277/api/cart-add?userId=${userId}&productId=${product.id}&quantity=1`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                userId: parseInt(userId),
-                productId: parseInt(product.id)
-            })
+            }
         })
             .then((response) => {
+                NotificationManager.removeAll();
                 if (response.ok) {
                     console.log('Product added to cart successfully.');
+                    NotificationManager.success("Produs adăgat cu succes");
                     
-                    // Handle the case when the product is added to the cart successfully
                 } else {
                     console.log('Error adding product to cart:', response.status);
-                    // Handle the case when there was an error adding the product to the cart
+                    NotificationManager.error("Eroare adăugare produs");
                 }
             })
             .catch((error) => {
                 console.error('Error adding product to cart:', error);
-                // Handle any other errors that occurred during the request
+                
             });
     };
 
@@ -73,6 +72,8 @@ const ProductDetails = () => {
                     <button id="add-to-cart" onClick={handleAddToCart}>Adaugă în coș <BsFillCartFill id="icon-product" /></button>
                 </div>
             </div>
+            <NotificationContainer className="custom-notification-container"
+                notificationClassName="custom-notification" />
         </div>
     );
 };

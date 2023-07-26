@@ -20,12 +20,16 @@ const ImageSlider = () => {
         },
         {
             url: 'https://www.apple.com/v/iphone-14-pro/h/images/key-features/hero/hero_deep_purple__dlhl8s8j6wk2_large_2x.jpg',
-            productId: 1
+            productId: 10
         },
        
         {
             url: 'https://www.apple.com/v/apple-watch-series-8/c/images/overview/design/design_always_on__d2xu1t2c9bwy_large_2x.jpg',
             productId: 6
+        },
+        {
+            url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.cisco.com%2Fc%2Fdam%2Fen%2Fus%2Fproducts%2Fcollateral%2Fcollaboration-endpoints%2Fheadsets%2Fbang-olufsen-980-ds.docx%2F_jcr_content%2Frenditions%2Fbang-olufsen-980-ds_0.png&f=1&nofb=1&ipt=f963937d177cd96cfc2ae52852ad1b9d47fa1736b4c2a5ce49c8f92d6c735dcb&ipo=images',
+            productId: 11
         }
     ];
 
