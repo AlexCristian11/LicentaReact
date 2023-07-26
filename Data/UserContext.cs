@@ -20,9 +20,17 @@ namespace LicentaReact.Data
 
 		public DbSet<CartItem> CartItems { get; set; }
 
+		public DbSet<Receipt> Receipts { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			
+			modelBuilder.Entity<Receipt>()
+				.HasOne(r => r.Cart)
+				.WithMany()
+				.HasForeignKey(r => r.CartId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			base.OnModelCreating(modelBuilder);
 		}
 
 	}

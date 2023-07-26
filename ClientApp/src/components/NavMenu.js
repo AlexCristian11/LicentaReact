@@ -20,6 +20,7 @@ const NavMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [shouldRefresh, setShouldRefresh] = useState(false);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -37,7 +38,7 @@ const NavMenu = () => {
         if (prenume) {
             setIsLoggedIn(true);
             setUsername(prenume);
-
+            setShouldRefresh(true);
         }
 
         const email = localStorage.getItem('email');

@@ -15,5 +15,12 @@ namespace LicentaReact.Models
 		
 		[JsonIgnore]
 		public string Parola { get; set; }
+
+		public Cart Cart { get; set; }
+
+		public User()
+		{
+			Cart = new Cart();
+		}
 	}
 }
